@@ -1,0 +1,39 @@
+{
+  "name": "ghost-cli-supervisor",
+  "version": "0.0.1",
+  "description": "Ghost-CLI process manager that uses systemd to run Ghost",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vikaspotluri123/ghost-cli-supervisor.git"
+  },
+  "keywords": [
+    "ghost-cli-extension",
+    "ghost",
+    "ghost-cli"
+  ],
+  "author": "Vikas Potluri <me@vikaspotluri.ml>",
+  "license": "MIT",
+  "engines": {
+    "node": "^4.5.0 || ^6.5.0"
+  },
+  "bugs": {
+    "url": "https://github.com/vikaspotluri123/ghost-cli-supervisor/issues"
+  },
+  "homepage": "https://github.com/vikaspotluri123/ghost-cli-supervisor#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "execa": "^0.8.0",
+    "ghost-cli": "^1.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.5.0"
+  },
+  "ghost-cli": {
+    "process-managers": {
+      "supervisor": "supervisor.js"
+    }
+  }
+}

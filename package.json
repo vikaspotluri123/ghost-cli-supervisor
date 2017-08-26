@@ -26,7 +26,8 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "execa": "^0.8.0",
-    "ghost-cli": "^1.1.1"
+    "ghost-cli": "^1.1.1",
+    "lodash.template": "^4.4.0"
   },
   "devDependencies": {
     "eslint": "^4.5.0"

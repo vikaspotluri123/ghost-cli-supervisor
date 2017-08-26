@@ -1,0 +1,7 @@
+[program:<%= name %>]
+command = <%= ghost_exec_path %> run
+directory = <%= dir %>
+user = <%= user %>
+autostart = true
+autorestart = true
+environment = NODE_ENV="<%= environment %>"

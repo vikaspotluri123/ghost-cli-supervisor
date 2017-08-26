@@ -24,9 +24,9 @@ class SupervisorExtension extends cli.Extension {
       return task.skip();
     }
 
-    let fileBaseName = `ghost_${ctx.instance.name}`;
+    let fileBaseName = `${ctx.instance.name}`;
 
-    if (ctx.instance.cliConfig.get('extension.supervisor', false) || fs.existsSync(path.join('/etc/supervisorctl/conf.d', `${fileBaseName}.conf`))) {
+    if (ctx.instance.cliConfig.get('extension.supervisor', false) || fs.existsSync(path.join('/etc/supervisor/conf.d', `${fileBaseName}.conf`))) {
       this.ui.log('Supervisor has already been set up. Skipping Supervisor setup');
       return task.skip();
     }
@@ -39,13 +39,13 @@ class SupervisorExtension extends cli.Extension {
       user: 'ghost',
       environment: this.system.environment,
       ghost_exec_path: process.argv.slice(0,2).join(' ')
-    }), 'supervisor config', `${fileBaseName}.conf`, '/etc/supervisorctl/conf.d').then(
-      () => this.ui.sudo('supervisorctl reread')
+    }), 'supervisor config', `${fileBaseName}.conf`, '/etc/supervisor/conf.d').then(
+      () => this.ui.sudo('supervisorctl update')
     );
   }
 
   uninstall(instance) {
-    let serviceFilename = `/etc/supervisorctl/conf.d/ghost_${instance.name}.conf`;
+    let serviceFilename = `/etc/supervisor/conf.d/${instance.name}.conf`;
 
     if (fs.existsSync(serviceFilename)) {
       return this.ui.sudo(`rm ${serviceFilename}`).catch(

@@ -10,13 +10,13 @@ const getUid = require('./get-uid');
 class SupervisorProcessManager extends cli.ProcessManager {
 
   get programName() {
-    return `ghost_${this.instance.name}`;
+    return `${this.instance.name}`;
   }
 
   start() {
     this._precheck();
 
-    return this.ui.sudo(`supervisorctl start ${this.programName})`)
+    return this.ui.sudo(`supervisorctl start ${this.programName}`)
       .catch((error) => Promise.reject(new cli.errors.ProcessError(error)));
   }
 
@@ -43,7 +43,9 @@ class SupervisorProcessManager extends cli.ProcessManager {
       return Boolean(response.stdout.match(/RUNNING|STARTING/))
     }
     catch(e) {
-      console.log(e); //@todo figure out what possible errors could show up
+      //@todo see if any other errors should return true
+      if(!e.message.match(/start/))
+        return true;
       return false;
     }
   }
@@ -64,7 +66,7 @@ class SupervisorProcessManager extends cli.ProcessManager {
       throw new cli.errors.SystemError('Supervisor process manager has not been set up. Run `ghost setup linux-user supervisor` and try again.');
     }
 
-    if (fs.existsSync(`/etc/systemd/conf.d/${this.programName}.conf`)) {
+    if (fs.existsSync(`/etc/supervisor/conf.d/${this.programName}.conf`)) {
       return;
     }
 

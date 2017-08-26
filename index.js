@@ -56,3 +56,5 @@ class SupervisorExtension extends cli.Extension {
     return Promise.resolve();
   }
 }
+
+module.exports = SupervisorExtension;

@@ -9,34 +9,34 @@ const getUid = require('./get-uid');
 
 class SupervisorProcessManager extends cli.ProcessManager {
 
-  get name() {
+  get programName() {
     return `ghost_${this.instance.name}`;
   }
 
   start() {
     this._precheck();
 
-    return this.ui.sudo(`supervisorctl start ${this.name})`)
+    return this.ui.sudo(`supervisorctl start ${this.programName})`)
       .catch((error) => Promise.reject(new cli.errors.ProcessError(error)));
   }
 
   stop() {
     this._precheck();
 
-    return this.ui.sudo(`supervisorctl stop ${this.name}`)
+    return this.ui.sudo(`supervisorctl stop ${this.programName}`)
       .catch((error) => Promise.reject(new cli.errors.ProcessError(error)));
   }
 
   restart() {
     this._precheck();
 
-    return this.ui.sudo(`supervisorctl restart ${this.name}`)
+    return this.ui.sudo(`supervisorctl restart ${this.programName}`)
       .catch((error) => Promise.reject(new cli.errors.ProcessError(error)));
   }
 
   isRunning() {
     try {
-      let command = `supervisorctl status ${this.name}`;
+      let command = `supervisorctl status ${this.programName}`;
       this.log(`Running sudo command: ${command}`, 'gray');
       let response = execa.shellSync(command);
       //Based on https://git.io/v5OKV - Backoff not used
@@ -64,7 +64,7 @@ class SupervisorProcessManager extends cli.ProcessManager {
       throw new cli.errors.SystemError('Supervisor process manager has not been set up. Run `ghost setup linux-user supervisor` and try again.');
     }
 
-    if (fs.existsSync(`/etc/systemd/conf.d/${this.name}.conf`)) {
+    if (fs.existsSync(`/etc/systemd/conf.d/${this.programName}.conf`)) {
       return;
     }
 

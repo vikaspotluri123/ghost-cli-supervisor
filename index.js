@@ -26,7 +26,7 @@ class SupervisorExtension extends cli.Extension {
 
     let fileBaseName = `${ctx.instance.name}`;
 
-    if (ctx.instance.cliConfig.get('extension.supervisor', false) || fs.existsSync(path.join('/etc/supervisor/conf.d', `${fileBaseName}.conf`))) {
+    if (fs.existsSync(path.join('/etc/supervisor/conf.d', `${fileBaseName}.conf`))) {
       this.ui.log('Supervisor has already been set up. Skipping Supervisor setup');
       return task.skip();
     }

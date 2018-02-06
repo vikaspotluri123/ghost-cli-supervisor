@@ -26,12 +26,12 @@
   "homepage": "https://github.com/vikaspotluri123/ghost-cli-supervisor#readme",
   "dependencies": {
     "bluebird": "^3.5.1",
-    "execa": "^0.8.0",
-    "ghost-cli": "^1.4.0",
+    "execa": "^0.9.0",
+    "ghost-cli": "^1.4.2",
     "lodash.template": "^4.4.0"
   },
   "devDependencies": {
-    "eslint": "^4.12.1"
+    "eslint": "^4.17.0"
   },
   "main": "index.js",
   "ghost-cli": {

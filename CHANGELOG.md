@@ -1,5 +1,8 @@
 # Changelog
 
+0.5.1
+- No code changes (forgot to release 0.0.11 & npm doesn't allow tag republishing)
+
 0.5.0
 - Version number reflects compatibility with Ghost-CLI
 - Check that ghost legitimately started before returning

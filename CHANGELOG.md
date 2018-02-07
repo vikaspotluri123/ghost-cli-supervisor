@@ -1,5 +1,8 @@
 # Changelog
 
+0.5.0
+- Version number reflects compatibility with Ghost-CLI
+- Check that ghost legitimately started before returning
 
 Future releases will follow CLI minor version
 

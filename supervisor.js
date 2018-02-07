@@ -16,7 +16,7 @@ class SupervisorProcessManager extends cli.ProcessManager {
         this._precheck();
 
         return this.ui.sudo(`supervisorctl start ${this.programName}`)
-            .then(this.ensureStarted)
+            .then(this.ensureStarted.bind(this))
             .catch((error) => {
                 if (error instanceof cli.errors.CliError) {
                     throw error;
@@ -37,7 +37,7 @@ class SupervisorProcessManager extends cli.ProcessManager {
         this._precheck();
 
         return this.ui.sudo(`supervisorctl restart ${this.programName}`)
-            .then(this.ensureStarted)
+            .then(this.ensureStarted.bind(this))
             .catch((error) => {
                 if (error instanceof cli.errors.CliError) {
                     throw error;

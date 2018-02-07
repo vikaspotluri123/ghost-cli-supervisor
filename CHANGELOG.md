@@ -1,5 +1,8 @@
 # Changelog
 
+0.5.2
+- Make 0.5.1 actually work (missing binding)
+
 0.5.1
 - No code changes (forgot to release 0.0.11 & npm doesn't allow tag republishing)
 

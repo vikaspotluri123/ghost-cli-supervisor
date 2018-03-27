@@ -5,10 +5,11 @@ const cli = require('ghost-cli');
 const execa = require('execa');
 const Promise = require('bluebird');
 const getUid = require('./get-uid');
-
+const debug = require('debug')('ghost-cli-supervisor:process-manager');
 
 class SupervisorProcessManager extends cli.ProcessManager {
     get programName() {
+        debug(this.instance.name);
         return `${this.instance.name}`;
     }
 
@@ -48,19 +49,15 @@ class SupervisorProcessManager extends cli.ProcessManager {
     }
 
     isRunning() {
-        try {
-            const command = `supervisorctl status ${this.programName}`;
-            this.log(`Running sudo command: ${command}`, 'gray');
-            const response = execa.shellSync(command);
-            // Based on https://git.io/v5OKV - Backoff not used
-            return Boolean(response.stdout.match(/RUNNING|STARTING/))
-        } catch (e) {
-            // @todo see if any other errors should return true
-            if (!e.message.match(/start/)) {
-                return true;
-            }
-            return false;
-        }
+        return this.ui.sudo(`supervisorctl status ${this.programName}`)
+            .then(response => {
+                debug(response.stdout);
+                return Boolean(response.stdout.match(/RUNNING|STARTING/))
+            })
+            .catch(error =>
+                // @todo see if any other errors should return true
+                !error.message.match(/start/)
+            );
     }
 
     static willRun() {

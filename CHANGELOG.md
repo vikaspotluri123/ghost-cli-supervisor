@@ -1,5 +1,9 @@
 # Changelog
 
+0.6.0
+- Updated to work with Ghost-CLI 1.6.0
+- You might have had issues maintaining the state of a ghost instance in 0.5.x. With changes made in parallel to Ghost-CLI 1.6.0 this shouldn't happen again
+
 0.5.2
 - Make 0.5.1 actually work (missing binding)
 

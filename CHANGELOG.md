@@ -3,9 +3,10 @@
 0.6.0
 - Updated to work with Ghost-CLI 1.6.0
 - You might have had issues maintaining the state of a ghost instance in 0.5.x. With changes made in parallel to Ghost-CLI 1.6.0 this shouldn't happen again
+- Return a Promise w/ `isRunning` in the Process Manager Extension (this feature was added in CLI v1.6.0)
 
 0.5.2
-- Make 0.5.1 actually work (missing binding)
+- Make 0.5.1 actually work (missing callback binding)
 
 0.5.1
 - No code changes (forgot to release 0.0.11 & npm doesn't allow tag republishing)

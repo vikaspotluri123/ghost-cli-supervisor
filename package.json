@@ -18,7 +18,7 @@
   "author": "Vikas Potluri <me@vikaspotluri.ml>",
   "license": "MIT",
   "engines": {
-    "node": "^4.5.0 || ^6.5.0 || ^8.9.0"
+    "node": "^6.5.0 || ^8.9.0"
   },
   "bugs": {
     "url": "https://github.com/vikaspotluri123/ghost-cli-supervisor/issues"
@@ -28,7 +28,7 @@
     "bluebird": "3.5.1",
     "debug": "3.1.0",
     "execa": "0.10.0",
-    "ghost-cli": "1.6.0",
+    "ghost-cli": "1.7.2",
     "lodash.template": "4.4.0"
   },
   "devDependencies": {

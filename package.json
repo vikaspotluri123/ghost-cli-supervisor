@@ -1,6 +1,6 @@
 {
   "name": "ghost-cli-supervisor",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Ghost-CLI process manager that uses systemd to run Ghost",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

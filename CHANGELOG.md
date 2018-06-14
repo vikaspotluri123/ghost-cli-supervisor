@@ -1,5 +1,8 @@
 # Changelog
 
+0.8.0
+- Update Ghost-CLI to 1.8.1 (includes security updates)
+
 0.7.0
 - Drop node v4 support
 - Update Ghost-CLI to 1.7.2

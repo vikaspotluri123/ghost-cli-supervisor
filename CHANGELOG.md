@@ -1,5 +1,9 @@
 # Changelog
 
+0.9.0
+- Update Ghost-CLI to 1.9.0
+- Fixes issues with controlling Ghost 2.0
+
 0.8.0
 - Update Ghost-CLI to 1.8.1 (includes security updates)
 

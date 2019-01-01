@@ -40,7 +40,7 @@ class SupervisorExtension extends cli.Extension {
             ghost_exec_path: process.argv.slice(0,2).join(' ')
         });
 
-        return this.template(instance, contents, 'supervisor config', `${fileBaseName}.conf`, '/etc/supervisor/conf.d').then(
+        return this.template(ctx.instance, contents, 'supervisor config', `${fileBaseName}.conf`, '/etc/supervisor/conf.d').then(
             () => this.ui.sudo('supervisorctl update')
         );
     }

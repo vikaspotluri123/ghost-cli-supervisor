@@ -33,7 +33,7 @@ class SupervisorExtension extends cli.Extension {
 
         const service = template(fs.readFileSync(path.join(__dirname, 'ghost.supervisor.template'), 'utf8'));
 
-        return ctx.instance.template(service({
+        return this.template(service({
             name: fileBaseName,
             dir: process.cwd(),
             user: 'ghost',

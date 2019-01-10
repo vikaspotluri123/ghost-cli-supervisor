@@ -35,7 +35,7 @@ class SupervisorExtension extends cli.Extension {
         const contents = service({
             name: fileBaseName,
             dir: process.cwd(),
-            user: uid,
+            user: 'ghost',
             environment: this.system.environment,
             ghost_exec_path: process.argv.slice(0,2).join(' ')
         });

@@ -1,4 +1,8 @@
 # Changelog
+0.9.1
+- Updates Ghost-CLI to 1.9.8
+- Other miscellaneous dependency updates
+- Updates template usage to match updated Extension Class (#2, @bobthemac)
 
 0.9.0
 - Update Ghost-CLI to 1.9.0

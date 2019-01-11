@@ -1,5 +1,6 @@
 # Changelog
 [0.9.1](https://github.com/vikaspotluri123/ghost-cli-supervisor/compare/v0.9.0...v0.9.1)
+- Add support for Node v10
 - Updates Ghost-CLI to 1.9.8
 - Other miscellaneous dependency updates
 - Updates template usage to match updated Extension Class ([#2](https://github.com/vikaspotluri123/ghost-cli-supervisor/pull/2), [@bobthemac](https://github.com/bobthemac))

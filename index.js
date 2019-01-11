@@ -32,14 +32,15 @@ class SupervisorExtension extends cli.Extension {
         }
 
         const service = template(fs.readFileSync(path.join(__dirname, 'ghost.supervisor.template'), 'utf8'));
-
-        return ctx.instance.template(service({
+        const contents = service({
             name: fileBaseName,
             dir: process.cwd(),
             user: 'ghost',
             environment: this.system.environment,
             ghost_exec_path: process.argv.slice(0,2).join(' ')
-        }), 'supervisor config', `${fileBaseName}.conf`, '/etc/supervisor/conf.d').then(
+        });
+
+        return this.template(ctx.instance, contents, 'supervisor config', `${fileBaseName}.conf`, '/etc/supervisor/conf.d').then(
             () => this.ui.sudo('supervisorctl update')
         );
     }

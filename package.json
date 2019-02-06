@@ -28,12 +28,12 @@
     "bluebird": "3.5.3",
     "debug": "4.1.1",
     "execa": "1.0.0",
-    "ghost-cli": "1.9.8",
+    "ghost-cli": "1.9.9",
     "lodash.template": "4.4.0",
     "portfinder": "^1.0.20"
   },
   "devDependencies": {
-    "eslint": "5.12.0"
+    "eslint": "5.13.0"
   },
   "main": "index.js",
   "ghost-cli": {

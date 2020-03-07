@@ -1,9 +1,6 @@
-'use strict';
-
 const fs = require('fs');
 const {errors, ProcessManager} = require('ghost-cli');
 const execa = require('execa');
-const Promise = require('bluebird');
 const getUid = require('./get-uid');
 const debug = require('debug')('ghost-cli-supervisor:process-manager');
 

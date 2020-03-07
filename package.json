@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/vikaspotluri123/ghost-cli-supervisor#readme",
   "dependencies": {
-    "bluebird": "3.5.5",
     "debug": "4.1.1",
     "execa": "1.0.0",
     "ghost-cli": "1.11.0",

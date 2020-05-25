@@ -15,7 +15,7 @@
     "ghost",
     "ghost-cli"
   ],
-  "author": "Vikas Potluri <me@vikaspotluri.ml>",
+  "author": "Vikas Potluri <me@vikaspotluri.me>",
   "license": "MIT",
   "engines": {
     "node": "^6.9.0 || ^8.9.0 || ^10.13.0"

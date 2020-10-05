@@ -35,6 +35,11 @@
     "xo": "^0.33.1"
   },
   "main": "index.js",
+  "xo": {
+    "rules": {
+      "func-names": "off"
+    }
+  },
   "ghost-cli": {
     "after": "ghost-cli-user",
     "process-managers": {

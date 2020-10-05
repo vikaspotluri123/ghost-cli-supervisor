@@ -1,4 +1,3 @@
-'use strict';
 const fs = require('fs');
 const {errors, ProcessManager} = require('ghost-cli');
 const execa = require('execa');
@@ -7,80 +6,77 @@ const debug = require('debug')('ghost-cli-supervisor:process-manager');
 
 const {CliError, ProcessError, SystemError} = errors;
 
+function wrapError(error) {
+	if (error instanceof CliError) {
+		throw error;
+	}
+
+	throw new ProcessError(error);
+}
+
 class SupervisorProcessManager extends ProcessManager {
 	get programName() {
 		debug(this.instance.name);
 		return `${this.instance.name}`;
 	}
 
-	updateSocket() {
+	async updateSocket() {
 		const portfinder = require('portfinder');
+		const port = await portfinder.getPortPromise();
+
 		const socketAddress = {
-			port: null,
-			host: 'localhost'
+			host: 'localhost',
+			port
 		};
 
-		return portfinder.getPortPromise().then(port => {
-			socketAddress.port = port;
-			this.instance.config.set('bootstrap-socket', socketAddress);
-			this.instance.config.save();
-			return socketAddress;
-		});
+		this.instance.config.set('bootstrap-socket', socketAddress);
+		this.instance.config.save();
+		return socketAddress;
 	}
 
-	start() {
+	async start() {
 		this._precheck();
 
-		let socketAddress;
-		return this.updateSocket().then(_socketAddress => {
-			socketAddress = _socketAddress;
-			return this.ui.sudo(`supervisorctl start ${this.programName}`);
-		}).then(() =>
-			this.ensureStarted({socketAddress})
-		).catch(error => {
-			if (error instanceof CliError) {
-				throw error;
-			}
-
-			throw new ProcessError(error);
-		});
+		try {
+			const socketAddress = await this.updateSocket();
+			await this.ui.sudo(`supervisorctl start ${this.programName}`);
+			await this.ensureStarted({socketAddress});
+		} catch (error) {
+			wrapError(error);
+		}
 	}
 
-	stop() {
+	async stop() {
 		this._precheck();
 
-		return this.ui.sudo(`supervisorctl stop ${this.programName}`)
-			.catch(error => Promise.reject(new ProcessError(error)));
+		try {
+			await this.ui.sudo(`supervisorctl stop ${this.programName}`);
+		} catch (error) {
+			wrapError(error);
+		}
 	}
 
-	restart() {
+	async restart() {
 		this._precheck();
 
-		let socketAddress;
-		return this.updateSocket().then(_socketAddress => {
-			socketAddress = _socketAddress;
-			return this.ui.sudo(`supervisorctl restart ${this.programName}`);
-		}).then(() =>
-			this.ensureStarted({socketAddress})
-		).catch(error => {
-			if (error instanceof CliError) {
-				throw error;
-			}
-
-			throw new ProcessError(error);
-		});
+		try {
+			const socketAddress = await this.updateSocket();
+			await this.ui.sudo(`supervisorctl restart ${this.programName}`);
+			await this.ensureStarted({socketAddress});
+		} catch (error) {
+			wrapError(error);
+		}
 	}
 
-	isRunning() {
-		return this.ui.sudo(`supervisorctl status ${this.programName}`)
-			.then(response => {
-				debug(response.stdout);
-				return Boolean(response.stdout.match(/RUNNING|STARTING/));
-			})
-			.catch(error =>
+	async isRunning() {
+		try {
+			const response = await this.ui.sudo(`supervisorctl status ${this.programName}`);
+			debug(response.stdout);
+			return Boolean(response.stdout.match(/RUNNING|STARTING/));
+		} catch (error) {
 			// @todo see if any other errors should return true
-				!error.message.match(/start/)
-			);
+			return !error.message.match(/start/);
+		}
 	}
 
 	static willRun() {

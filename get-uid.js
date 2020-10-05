@@ -11,21 +11,21 @@ const execa = require('execa');
  * but if so, it returns the user id of the ghost user
  */
 module.exports = function getUid(dir) {
-    try {
-        const uid = execa.shellSync('id -u ghost').stdout;
-        const stat = fs.lstatSync(path.join(dir, 'content'));
+	try {
+		const uid = execa.shellSync('id -u ghost').stdout;
+		const stat = fs.lstatSync(path.join(dir, 'content'));
 
-        if (stat.uid.toString() !== uid) {
-            // Ghost user is not the owner of this folder, return null
-            return null;
-        }
+		if (stat.uid.toString() !== uid) {
+			// Ghost user is not the owner of this folder, return null
+			return null;
+		}
 
-        return uid;
-    } catch (e) {
-        if (!e.message.match(/no such user/i)) {
-            throw e;
-        }
+		return uid;
+	} catch (error) {
+		if (!error.message.match(/no such user/i)) {
+			throw error;
+		}
 
-        return null;
-    }
+		return null;
+	}
 };

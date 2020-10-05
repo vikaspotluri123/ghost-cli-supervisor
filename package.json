@@ -4,7 +4,7 @@
   "description": "Ghost-CLI process manager that uses systemd to run Ghost",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ."
+    "lint": "xo ."
   },
   "repository": {
     "type": "git",
@@ -29,11 +29,10 @@
     "execa": "4.0.3",
     "ghost-cli": "1.14.1",
     "lodash.template": "4.5.0",
-    "portfinder": "^1.0.28"
+    "portfinder": "^1.0.28",
+    "xo": "^0.33.1"
   },
-  "devDependencies": {
-    "eslint": "7.10.0"
-  },
+  "devDependencies": {},
   "main": "index.js",
   "ghost-cli": {
     "after": "ghost-cli-user",

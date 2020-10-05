@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         node: [ 10, 12 ]
-        os: [ ubuntu-18.04, windows-latest ]
+        # os: [ ubuntu-18.04, windows-latest ]
     env:
       FORCE_COLOR: 1
     name: ${{ matrix.os }} - node ${{ matrix.node }}

@@ -16,7 +16,7 @@ class SupervisorExtension extends cli.Extension {
 		}
 	}
 
-	_setup(argv, ctx, task) {
+	async _setup(argv, ctx, task) {
 		const uid = getUid(ctx.instance.dir);
 
 		if (!uid) {
@@ -37,12 +37,12 @@ class SupervisorExtension extends cli.Extension {
 			dir: process.cwd(),
 			user: 'ghost',
 			environment: this.system.environment,
+			// eslint-disable-next-line camelcase
 			ghost_exec_path: process.argv.slice(0, 2).join(' ')
 		});
 
-		return this.template(ctx.instance, contents, 'supervisor config', `${fileBaseName}.conf`, '/etc/supervisor/conf.d').then(
-			() => this.ui.sudo('supervisorctl update')
-		);
+		await this.template(ctx.instance, contents, 'supervisor config', `${fileBaseName}.conf`, '/etc/supervisor/conf.d');
+		await this.ui.sudo('supervisorctl update');
 	}
 
 	uninstall(instance) {

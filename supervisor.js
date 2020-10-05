@@ -1,3 +1,4 @@
+'use strict';
 const fs = require('fs');
 const {errors, ProcessManager} = require('ghost-cli');
 const execa = require('execa');

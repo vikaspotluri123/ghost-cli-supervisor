@@ -29,10 +29,11 @@
     "execa": "4.0.3",
     "ghost-cli": "1.14.1",
     "lodash.template": "4.5.0",
-    "portfinder": "^1.0.28",
+    "portfinder": "^1.0.28"
+  },
+  "devDependencies": {
     "xo": "^0.33.1"
   },
-  "devDependencies": {},
   "main": "index.js",
   "ghost-cli": {
     "after": "ghost-cli-user",
